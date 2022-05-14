@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="/css/Registro.css">
+        <title>Registro Paciente</title>
+        <script type="text/javascript" src="registroCliente.js"></script>
+    </head>
+    <body>
+        
+        <!--REGISTRO-->
+        <section class="formRegistro">
+            <h4>Médico</h4>
+            <!--Documento-->
+            <input class="Controls" type="text" name="Id_Medico" id="Id_Medico" placeholder="Ingrese su documento">
+            <!--Nombre-->
+            <input class="Controls" type="text" name="nombres" id="nombres" placeholder="Ingrese su nombre">
+            <!--Apellido-->
+            <input class="Controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su apellido">
+            <!--Especialidad-->
+            <input class="Controls" type="text" name="Especialidad" id="Especialidad" placeholder="Ingrese su especialidad">
+            <!--btn registro-->
+            <input class="butRegistrar" type="submit" onclick="getDatos()" value="Registrar">
+        </section>
+    </body>
+</html>
