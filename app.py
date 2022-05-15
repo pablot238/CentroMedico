@@ -61,10 +61,9 @@ def get_data(collection,member):
 
         res = make_response(jsonify({"error": "Miembro no encontrado"}),400) #Enviar un mensaje de error
         return res
-        
+
     res = make_response(jsonify({"error": "Colección no encontrada"}),400) #Enviar un mensaje de error
     return res
-
 
 if __name__ == "__main__":
     print("El servidor está corriendo en el puerto %s"%(PORT))
