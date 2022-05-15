@@ -1,4 +1,4 @@
-from pydoc import doc
+import collections
 from flask import Flask, render_template, make_response, jsonify, request 
 
 doctor = Flask(__name__)
@@ -28,12 +28,8 @@ PRUEBA = {
     }
 }
 
-#METODO GET
+#METODOS GET
 @doctor.route("/")
-def home():
-    return "<h1 style='color:blue'> Bienvenido al home!!</h1>"
-
-@doctor.route("/temp")
 def template():
     return render_template("RegistroM.html") #retornar el HTML del FE
 
@@ -44,17 +40,32 @@ def query_string():
         res = {}
         for key, value in req.items(): #Regresar el elemento de forma más estética
             res[key] = value
-        res = make_response(jsonify(res),200)
+        res = make_response(jsonify(res),200) #Retornar el query
         return res
     
     res = make_response(jsonify({"error": "No hay query String"}),400) #Enviar un mensaje de error
     return res
 
-@doctor.route("/json")
+@doctor.route("/json") #Retornar el objeto completo
 def get_json():
     res = make_response(jsonify(PRUEBA), 200)
     return res
 
+@doctor.route("/json/<collection>/<member>") #Llamar algún miembro dentro de las colecciones
+def get_data(collection,member):
+    if collection in PRUEBA: #Verificar si la coleccion existe
+        member = PRUEBA[collection].get(member)
+        if member: #Si existe el miembro
+            res = make_response(jsonify({"res": member}), 200)
+            return res
+
+        res = make_response(jsonify({"error": "Miembro no encontrado"}),400) #Enviar un mensaje de error
+        return res
+        
+    res = make_response(jsonify({"error": "Colección no encontrada"}),400) #Enviar un mensaje de error
+    return res
+
+
 if __name__ == "__main__":
-    print("Server running in port %s"%(PORT))
+    print("El servidor está corriendo en el puerto %s"%(PORT))
     doctor.run(host=HOST, port=PORT) #Pasamos el local host y el puerto
